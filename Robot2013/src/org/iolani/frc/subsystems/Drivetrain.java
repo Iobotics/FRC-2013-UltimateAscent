@@ -23,10 +23,10 @@ public class Drivetrain extends Subsystem {
     private RobotDrive _drive;
     
     public void init() {
-        _LFt = new Talon(RobotMap.driveLeftFrontTalonPWM);
-        _LRt = new Talon(RobotMap.driveLeftRearTalonPWM);
-        _RFt = new Talon(RobotMap.driveRightFrontTalonPWM);
-        _RRt = new Talon(RobotMap.driveRightRearTalonPWM);
+        _LFt = new Talon(RobotMap.driveLeftFrontPWM);
+        _LRt = new Talon(RobotMap.driveLeftRearPWM);
+        _RFt = new Talon(RobotMap.driveRightFrontPWM);
+        _RRt = new Talon(RobotMap.driveRightRearPWM);
         _drive = new RobotDrive(_LFt, _LRt, _RFt, _RRt);
         
         _drive.setSafetyEnabled(false);
