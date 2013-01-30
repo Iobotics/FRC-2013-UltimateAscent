@@ -15,4 +15,7 @@ public class RobotMap {
     
     // intake //
     public static final int intakePWM = 5;
+    
+    // conveyor //
+    public static final int conveyorVictorPWM = 6;
 }
