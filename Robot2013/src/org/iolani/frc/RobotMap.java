@@ -15,4 +15,10 @@ public class RobotMap {
     
     // intake //
     public static final int intakePWM = 5;
+    
+    // shooter //
+    public static final int shooterStageOneJaguarID   = 20;
+    public static final int shooterStageTwoJaguarID   = 21;
+    public static final int shooterStageThreeJaguarID = 22;
+    public static final int shooterAltitudeJaguarID   = 23;
 }
