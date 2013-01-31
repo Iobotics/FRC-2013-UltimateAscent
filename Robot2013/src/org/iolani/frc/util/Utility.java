@@ -21,6 +21,28 @@ public class Utility {
         }
     }
     
+    public static CANJaguar createJaguar(String name, int id, CANJaguar.ControlMode controlMode, CANJaguar.PositionReference positionReference) {
+        try {
+            CANJaguar jag = new CANJaguar(id, controlMode);
+            jag.setPositionReference(positionReference);
+            return jag;
+        } catch (CANTimeoutException e) {
+            System.out.println("Error initializing Jaguar: " + name + controlMode + "/n" + e);
+            return null;
+        }
+    }
+    
+    public static CANJaguar createJaguar(String name, int id, CANJaguar.ControlMode controlMode, CANJaguar.SpeedReference speedReference) {
+        try {
+            CANJaguar jag = new CANJaguar(id, controlMode);
+            jag.setSpeedReference(speedReference);
+            return jag;
+        } catch (CANTimeoutException e) {
+            System.out.println("Error initializing Jaguar: " + name + controlMode + "/n" + e);
+            return null;
+        }
+    }
+        
     public static boolean setJaguar(CANJaguar jag, double x) {
         try {
             jag.setX(x);
