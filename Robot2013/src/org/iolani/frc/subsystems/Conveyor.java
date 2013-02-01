@@ -16,17 +16,50 @@ import org.iolani.frc.util.*;
 public class Conveyor extends Subsystem {
     private static Victor _victor;
     private double _power;
+    private ConveyorMode _conveyorMode;
     
     protected Conveyor(int channel) {
         _victor = new Victor(RobotMap.conveyorVictorPWM);
     }
     
-    public void setConveyorPower(double pwr){
+    public void setConveyor(ConveyorMode mode) {
+        if (_conveyorMode == mode) return;
+        switch (mode.value) {
+            case ConveyorMode.kOff_val:
+                setPower(0.0);
+                break;
+            case ConveyorMode.kUp_val:
+                setPower(1.0);
+                break;
+            case ConveyorMode.kDown_val:
+                setPower(-1.0);
+                break;
+        }
+        _conveyorMode = mode;
+    }
+    
+    private void setPower(double pwr){
         _power = pwr;
         _victor.set(pwr);
     }
     
     public void initDefaultCommand() {
         
+    }
+    
+    public static final class ConveyorMode {
+        // int values //
+        public static final int kOff_val  = 0;
+        public static final int kUp_val   = 1;
+        public static final int kDown_val = 2;
+        // singletons //
+        public static final ConveyorMode kOff  = new ConveyorMode(kOff_val);
+        public static final ConveyorMode kUp   = new ConveyorMode(kUp_val);
+        public static final ConveyorMode kDown = new ConveyorMode(kDown_val);
+       
+        public final int value;
+        private ConveyorMode(int val) {
+            this.value = val;
+        }
     }
 }
