@@ -18,10 +18,13 @@ public class Conveyor extends Subsystem {
     private double _power;
     private ConveyorMode _conveyorMode;
     
-    protected Conveyor(int channel) {
-        _victor = new Victor(RobotMap.conveyorVictorPWM);
+    public Conveyor(int channel) {
+        _victor = new Victor(channel);
     }
     
+    public ConveyorMode getConveyorMode() {
+        return _conveyorMode;
+    }
     public void setConveyor(ConveyorMode mode) {
         if (_conveyorMode == mode) return;
         switch (mode.value) {

@@ -5,7 +5,10 @@
 package org.iolani.frc.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import org.iolani.frc.RobotMap;
+import org.iolani.frc.util.*;
 /**
  *
  * @author Hobbes
@@ -47,7 +50,11 @@ public class Loader extends Conveyor {
         return !(loaderSafetied() || loaderChambered());
     }
     
-    public void setPosition(LoaderMode mode) {
+    public LoaderMode getLoader() {
+        return _loaderMode;
+    }
+    
+    public void setLoader(LoaderMode mode) {
         if (_loaderMode == mode) return;
         switch (mode.value) {
             case LoaderMode.kHalt_val:
