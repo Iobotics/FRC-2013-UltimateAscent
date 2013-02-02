@@ -19,8 +19,8 @@ public abstract class CommandBase extends Command {
     public static Intake intake = new Intake();
     public static Loader loader = new Loader(0);
     public static Shooter shooter = new Shooter();
-    //public static Flipper flipper = new Flipper();
-    //public static Sensors sensors = new Sensors();
+    public static Flipper flipper = new Flipper(0);
+    public static Sensors sensors = new Sensors();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

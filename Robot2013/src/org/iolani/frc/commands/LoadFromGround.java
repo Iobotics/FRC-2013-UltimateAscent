@@ -10,9 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author iobotics
  */
-public class IntakeFromGround extends CommandGroup {
+public class LoadFromGround extends CommandGroup {
     
-    public IntakeFromGround() {
+    public LoadFromGround() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
