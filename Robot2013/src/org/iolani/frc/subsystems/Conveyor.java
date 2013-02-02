@@ -16,6 +16,10 @@ import org.iolani.frc.util.*;
 public class Conveyor extends Subsystem {
     private ConveyorMode _conveyorMode;
     
+    public Conveyor(int channel){
+        
+    }
+    
     public ConveyorMode getConveyorMode() {
         return _conveyorMode;
     }
@@ -23,23 +27,23 @@ public class Conveyor extends Subsystem {
         if (_conveyorMode == mode) return;
         switch (mode.value) {
             case ConveyorMode.kOff_val:
-                setPower(0.0);
+                //setPower(0.0);
                 break;
             case ConveyorMode.kUp_val:
-                setPower(1.0);
+                //setPower(1.0);
                 break;
             case ConveyorMode.kDown_val:
-                setPower(-1.0);
+                //setPower(-1.0);
                 break;
         }
         _conveyorMode = mode;
     }
     
-    private void setPower(double pwr){
-    }
+    //private void setPower(double pwr){
+    //}
     
     public void initDefaultCommand() {
-        
+        this.setConveyor(ConveyorMode.kOff);
     }
     
     public static final class ConveyorMode {
