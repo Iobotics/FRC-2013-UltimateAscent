@@ -14,13 +14,7 @@ import org.iolani.frc.util.*;
  * @author iobotics
  */
 public class Conveyor extends Subsystem {
-    private static Victor _victor;
-    private double _power;
     private ConveyorMode _conveyorMode;
-    
-    public Conveyor(int channel) {
-        _victor = new Victor(channel);
-    }
     
     public ConveyorMode getConveyorMode() {
         return _conveyorMode;
@@ -42,8 +36,6 @@ public class Conveyor extends Subsystem {
     }
     
     private void setPower(double pwr){
-        _power = pwr;
-        _victor.set(pwr);
     }
     
     public void initDefaultCommand() {
