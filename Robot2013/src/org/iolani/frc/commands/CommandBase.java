@@ -16,10 +16,11 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static Drivetrain drivetrain = new Drivetrain();
-    public static Intake intake = new Intake();
+    public static Intake intake = new Intake(0);
     public static Loader loader = new Loader(0);
-    public static Shooter shooter = new Shooter();
     public static Flipper flipper = new Flipper(0);
+    public static Hopper hopper = new Hopper(0);
+    public static Shooter shooter = new Shooter();
     public static Sensors sensors = new Sensors();
 
     public static void init() {

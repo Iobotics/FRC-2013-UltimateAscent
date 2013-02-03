@@ -4,25 +4,29 @@
  */
 package org.iolani.frc.subsystems;
 
-import edu.wpi.first.wpilibj.Victor;
+//import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
+import org.iolani.frc.subsystems.Conveyor;
 import org.iolani.frc.util.*;
 
 /**
  *
  * @author iobotics
  */
-public class Intake extends Subsystem {
-    private static Victor _victor;
-    private double _power;
-    private IntakeMode _mode;
-    
-    public void init() {
-        _victor = new Victor(RobotMap.intakePWM);
+public class Intake extends Conveyor {
+    //private static Victor _victor;
+    //private double _power;
+    //private IntakeMode _mode;
+    public Intake(int channel){
+        super(channel);
     }
     
-    public void setIntakePower(double pwr) {
+    public void init() {
+        //_victor = new Victor(RobotMap.intakePWM);
+    }
+    
+    /*public void setIntakePower(double pwr) {
         _power = pwr;
         _victor.set(pwr);
     }
@@ -70,4 +74,6 @@ public class Intake extends Subsystem {
     public void initDefaultCommand() {
         this.setIntake(IntakeMode.kOff);
     }
+    */
+    
 }
