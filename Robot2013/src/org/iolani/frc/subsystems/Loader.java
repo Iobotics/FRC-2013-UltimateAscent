@@ -4,9 +4,9 @@
  */
 package org.iolani.frc.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
 import org.iolani.frc.util.*;
 /**
@@ -15,39 +15,27 @@ import org.iolani.frc.util.*;
  */
 public class Loader extends Conveyor {
     private LoaderMode _loaderMode;
-    private boolean hasFrisbeeSwitch;
-    private boolean frisbeeCenteredSwitch; //frisbee centered in loader conveyor
-    private boolean chamberedSwitch; //loader in shooter position
-    private boolean safetiedSwitch;  //loader in safety position (positioned in conveyor system)
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    private static DigitalInput _chamberedSwitch; //loader in shooter position
+    private static DigitalInput _stowedSwitch;  //loader in safety position (positioned in conveyor system)
     
-    public Loader(int channel) {
-        super(channel);
-    }
-    
-    public boolean hasFrisbee() {
-        hasFrisbeeSwitch = false; //replace with sensor check for frisbee
-        return hasFrisbeeSwitch;
-    }
-    
-    public boolean centeredFrisbee() {
-        frisbeeCenteredSwitch = false; //replace with sensor check for frisbee
-        return frisbeeCenteredSwitch;
+    public void init() {
+        super.init();
+        // initialize belt actuator //
+        // initialize lever actuator //
+        // initialize chambered sensor //
+        // initialize stowed sensor //
     }
     
     public boolean loaderChambered() {
-        chamberedSwitch = false;
-        return chamberedSwitch;
+        return _chamberedSwitch.get();
     }
     
-    public boolean loaderSafetied() {
-        safetiedSwitch = false;
-        return safetiedSwitch;
+    public boolean loaderStowed() {
+        return _stowedSwitch.get();
     }
     
     public boolean loaderTransitioning() {
-        return !(loaderSafetied() || loaderChambered());
+        return !(loaderStowed() || loaderChambered());
     }
     
     public LoaderMode getLoader() {

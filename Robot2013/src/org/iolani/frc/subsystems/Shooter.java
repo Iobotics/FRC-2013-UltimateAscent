@@ -13,7 +13,7 @@ import org.iolani.frc.util.*;
 /**
  * Shooter.java
  * Controls frisbee shooter power & angle
- * 1/28/2013
+ * 2/2/2013
  */
 
 
@@ -21,25 +21,29 @@ public class Shooter extends Subsystem {
 //    private char[][][][] outputSpeed = new char[3][4][100][90];
     private CANJaguar _stageOne;
     private CANJaguar _stageTwo;
-    private CANJaguar _stageThree;
     private CANJaguar _altitude;
-    private ShotParameters _params;
+    private ShooterParameters _shooterParams;
+    private TargetParameters _targetParams;
+    private final double MAX_STAGE_ONE_SPEED = 0.0;
+    private final double SAFE_STAGE_ONE_SPEED = 0.0;
+    private final double MAX_STAGE_TWO_SPEED = 0.0;
+    private final double SAFE_STAGE_TWO_SPEED = 0.0;
+    private final double MAX_NO_SLIP_SPEED_CHANGE = 0.0;
+    private final double WHEEL_TO_FRISBEE_CONVERSION_K = 0.0;
     
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void init() {
-        _stageOne   = Utility.createJaguar("stage one",   RobotMap.shooterStageOneJaguarID,   CANJaguar.ControlMode.kSpeed, CANJaguar.SpeedReference.kEncoder);
-        _stageTwo   = Utility.createJaguar("stage two",   RobotMap.shooterStageTwoJaguarID,   CANJaguar.ControlMode.kSpeed, CANJaguar.SpeedReference.kEncoder);
-        _stageThree = Utility.createJaguar("stage three", RobotMap.shooterStageThreeJaguarID, CANJaguar.ControlMode.kSpeed, CANJaguar.SpeedReference.kEncoder);
-        _altitude   = Utility.createJaguar("altitude",    RobotMap.shooterAltitudeJaguarID,   CANJaguar.ControlMode.kPosition, CANJaguar.PositionReference.kQuadEncoder);
+        _stageOne = Utility.createJaguar("stage one",   RobotMap.shooterStageOneJaguarID,   CANJaguar.ControlMode.kSpeed, CANJaguar.SpeedReference.kEncoder);
+        _stageTwo = Utility.createJaguar("stage two",   RobotMap.shooterStageTwoJaguarID,   CANJaguar.ControlMode.kSpeed, CANJaguar.SpeedReference.kEncoder);
+        _altitude = Utility.createJaguar("altitude",    RobotMap.shooterAltitudeJaguarID,   CANJaguar.ControlMode.kPosition, CANJaguar.PositionReference.kQuadEncoder);
     }
     
     public void enableShooter() {
         try {
             _stageOne.enableControl();
             _stageTwo.enableControl();
-            _stageThree.enableControl();
             _altitude.enableControl();
         } catch (CANTimeoutException e) {
             System.out.println("Error enabling Jaguars " + e);
@@ -50,139 +54,89 @@ public class Shooter extends Subsystem {
         try {
             _stageOne.disableControl();
             _stageTwo.disableControl();
-            _stageThree.disableControl();
             _altitude.disableControl();
         } catch (CANTimeoutException e) {
             System.out.println("Error disabling Jaguars " + e);
         }
     }
     
-    private CANJaguar getJaguar(int jaguarID) {
-        switch (jaguarID) {
-        case 20:
-            return _stageOne;
-        case 21:
-            return _stageTwo;
-        case 22:
-            return _stageThree;
-        case 23:
-            return _altitude;
-        default:
-            throw new IllegalArgumentException("Invalid Jaguar ID: " + jaguarID);
+    public TargetParameters getTargetParameters() {
+        if (_targetParams == null) {
+            throw new IllegalStateException("Shot parameters not set");
         }
+        return _targetParams;
     }
     
-    public void setCANkPID(int jaguarID, double kP, double kI, double kD) {
-        try {
-            getJaguar(jaguarID).setPID(kP, kI, kD);
-        } catch (CANTimeoutException e) {
-            System.out.println("Error setting Jaguar PID constants: " + jaguarID + "\n" + e);
-        }
-    }
-
-    public double getCANkP(int jaguarID) {
-        try {
-            return getJaguar(jaguarID).getP();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error getting Jaguar kP" + jaguarID + "\n" + e);
-            return 0;
-        }
+    public void setTargetParameters(TargetParameters params) {
+        _targetParams = params;
     }
     
-    public double getCANkI(int jaguarID) {
-        try {
-            return getJaguar(jaguarID).getI();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error getting Jaguar kI" + jaguarID + "\n" + e);
-            return 0;
-        }
-    }
-    
-    public double getCANkD(int jaguarID) {
-        try {
-            return getJaguar(jaguarID).getD();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error getting Jaguar kD" + jaguarID + "\n" + e);
-            return 0;
-        }
-    }
-    
-    public double getWheelSpeed(int jaguarID) {
-        try {
-            return getJaguar(jaguarID).getSpeed();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error checking wheel speed: " + e);
-            return 0.0;
-        }
-    }
-    
-    public double getWheelSpeedTarget(int jaguarID) {
-        try {
-            return getJaguar(jaguarID).getX();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error checking wheel speed target: " + e);
-            return 0.0;
-        }
-    }
-    
-    public void setWheelSpeed(int jaguarID, double jagSpeed) {
-        Utility.setJaguar(getJaguar(jaguarID), jagSpeed);
-        
-    }
-    
-    public void setWheelSpeed(double stageOneSpeed, double stageTwoSpeed, double stageThreeSpeed) {
+    private void setWheelSpeeds(double stageOneSpeed, double stageTwoSpeed) {
         Utility.setJaguar(_stageOne, stageOneSpeed);
         Utility.setJaguar(_stageTwo, stageTwoSpeed);
-        Utility.setJaguar(_stageThree, stageThreeSpeed);
     }
     
-    public double getShooterAltitude() {
-        try {
-            return _altitude.getPosition();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error checking shooter altitude: " + e);
-            return 0.0;
-        }
-    }
-    
-    public double getShooterAltitudeTarget() {
-        try {
-            return _altitude.getX();
-        } catch (CANTimeoutException e) {
-            System.out.println("Error checking shooter altitude: " + e);
-            return 0.0;
-        }
-    }
-        
-    public void setShooterAltitude(double altitude) {
+    private void setShooterAltitude(double altitude) {
         Utility.setJaguar(_altitude, altitude);
     }
 
-    public ShotParameters getShotParameters() {
-        if(_params == null) {
-            throw new IllegalStateException("Shot parameters not set");
+    private void setShooterParameters(TargetParameters params) {
+        /* The functions of this method need to be in the subsystem for robot safety, 
+         * but it really needs to be broken down into something less monolithic.
+         */
+        double alt;
+        double stageOneV;
+        double stageTwoV;
+        double frisbeeRotV;
+        
+        frisbeeRotV = params.frisbeeSpeed / WHEEL_TO_FRISBEE_CONVERSION_K;
+        alt = params.frisbeeAngle;
+        stageTwoV = params.frisbeeSpeed;
+        stageOneV = 0.0;
+        if (frisbeeRotV <= MAX_NO_SLIP_SPEED_CHANGE && frisbeeRotV <= SAFE_STAGE_ONE_SPEED) {
+            stageOneV = frisbeeRotV;
+        } else if (SAFE_STAGE_ONE_SPEED <= frisbeeRotV && frisbeeRotV <= MAX_NO_SLIP_SPEED_CHANGE) {
+            stageOneV = SAFE_STAGE_ONE_SPEED;
+        } else if ((MAX_NO_SLIP_SPEED_CHANGE + SAFE_STAGE_ONE_SPEED) <= frisbeeRotV) {
+            stageOneV = frisbeeRotV - MAX_NO_SLIP_SPEED_CHANGE;
         }
-        return _params;
-    }
-    
-    public void setShotParameters(ShotParameters params) {
-        _params = params;
+        
+        if (alt < -10.0 || alt > 85.0) {
+            System.out.println("IMPOSSIBLE: Shooter altitude of " + alt + "impossible");
+            return;
+        } else if (stageOneV > MAX_STAGE_ONE_SPEED || stageTwoV > MAX_STAGE_TWO_SPEED) {
+            System.out.println("IMPOSSIBLE: Shot Frisbee velocity of " + params.frisbeeSpeed + "impossible");
+            return;
+        } else if (stageOneV > SAFE_STAGE_ONE_SPEED || stageTwoV > SAFE_STAGE_TWO_SPEED) {
+            System.out.println("Unreliable: Shot Frisbee velocity of " + params.frisbeeSpeed + " too great for reliable shot");
+        }
+        setShooterAltitude(alt);
+        setWheelSpeeds(stageOneV, stageTwoV);
+        return;
     }
     
     public void initDefaultCommand() {
         this.disableShooter();
     }
     
-    public static class ShotParameters {
+    public static class TargetParameters {
+        public final double frisbeeAngle;
+        public final double frisbeeSpeed;
+        
+        public TargetParameters(double angle, double velocity) {
+            this.frisbeeAngle = angle;
+            this.frisbeeSpeed = velocity;
+        }        
+    }
+    
+    private static class ShooterParameters {
         public final double altitude;
         public final double stageOneSpeed;
         public final double stageTwoSpeed;
-        public final double stageThreeSpeed;
-        public ShotParameters(double alt, double stageOneVel, double stageTwoVel, double stageThreeVel) {
+        public ShooterParameters(double alt, double stageOneVel, double stageTwoVel) {
             this.altitude = alt;
             this.stageOneSpeed = stageOneVel;
             this.stageTwoSpeed = stageTwoVel;
-            this.stageThreeSpeed = stageThreeVel;
         }
     }
         
