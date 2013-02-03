@@ -19,9 +19,15 @@ public class RobotMap {
     // conveyor //
     public static final int conveyorVictorPWM = 6;
     
+    // flipper //
+    public static final int flipperConveyorPWM = 7;
+    public static final int flipperTwisterJaguarID = 23;
+    
+    // loader //
+    public static final int loaderConveyorPWM = 8;
+    public static final int loaderLeverJaguarID = 24;
     // shooter //
     public static final int shooterStageOneJaguarID   = 20;
     public static final int shooterStageTwoJaguarID   = 21;
-    public static final int shooterStageThreeJaguarID = 22;
-    public static final int shooterAltitudeJaguarID   = 23;
+    public static final int shooterAltitudeJaguarID   = 22;
 }

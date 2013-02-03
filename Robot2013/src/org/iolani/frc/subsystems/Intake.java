@@ -18,12 +18,14 @@ public class Intake extends Conveyor {
     //private static Victor _victor;
     //private double _power;
     //private IntakeMode _mode;
-    public Intake(int channel){
-        super(channel);
-    }
+
     
     public void init() {
-        //_victor = new Victor(RobotMap.intakePWM);
+        super.init();
+    }
+    
+    public Intake(int channel) {
+        super(channel);
     }
     
     /*public void setIntakePower(double pwr) {

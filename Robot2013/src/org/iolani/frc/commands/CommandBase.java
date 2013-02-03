@@ -16,10 +16,10 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static Drivetrain drivetrain = new Drivetrain();
-    public static Intake intake = new Intake(0);
-    public static Loader loader = new Loader(0);
-    public static Flipper flipper = new Flipper(0);
-    public static Hopper hopper = new Hopper(0);
+    public static Intake intake = new Intake(RobotMap.intakePWM);
+    public static Loader loader = new Loader(RobotMap.loaderConveyorPWM, RobotMap.loaderLeverJaguarID);
+    public static Flipper flipper = new Flipper(RobotMap.flipperConveyorPWM, RobotMap.flipperTwisterJaguarID);
+    public static Hopper hopper = new Hopper(RobotMap.conveyorVictorPWM);
     public static Shooter shooter = new Shooter();
     public static Sensors sensors = new Sensors();
 
@@ -32,6 +32,10 @@ public abstract class CommandBase extends Command {
         oi = new OI();
         
         intake.init();
+        hopper.init();
+        flipper.init();
+        loader.init();
+        shooter.init();
         drivetrain.init();
 
         // Show what command your subsystem is running on the SmartDashboard
