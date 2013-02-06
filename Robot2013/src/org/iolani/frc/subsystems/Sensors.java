@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Sensors extends Subsystem {
     
-    public boolean getBelowIntake(){
+    public boolean getBelowIntake() {
         return true;
     }
     
@@ -25,6 +25,10 @@ public class Sensors extends Subsystem {
     }
     
     public boolean getBetweenFlipperLoader() {
+        return true;
+    }
+    
+    public boolean getAfterLoader(){
         return true;
     }
     

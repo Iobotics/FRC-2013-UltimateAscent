@@ -20,7 +20,6 @@ public class Flipper extends Conveyor {
     }
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        this.setConveyor(Conveyor.ConveyorMode.kOff);
     }
 }

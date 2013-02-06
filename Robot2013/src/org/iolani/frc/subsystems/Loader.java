@@ -50,16 +50,16 @@ public class Loader extends Conveyor {
         return !(loaderSafetied() || loaderChambered());
     }
     
-    public LoaderMode getLoader() {
+    public LoaderMode getLoaderMode() {
         return _loaderMode;
     }
     
     public void setLoader(LoaderMode mode) {
         if (_loaderMode == mode) return;
         switch (mode.value) {
-            case LoaderMode.kHalt_val:
+            //case LoaderMode.kHalt_val:
                 //either brake actuator or set to 0.0
-                break;
+            //    break;
             case LoaderMode.kFlipUp_val:
                 //set actuator to 1.0
                 break;
@@ -76,11 +76,11 @@ public class Loader extends Conveyor {
     }
         
     public static final class LoaderMode {
-        public static final int kHalt_val     = 0;
+        //public static final int kHalt_val     = 0;
         public static final int kFlipUp_val   = 1;
         public static final int kFlipDown_val = 2;
         
-        public static final LoaderMode kHalt     = new LoaderMode (kHalt_val);
+        //public static final LoaderMode kHalt     = new LoaderMode (kHalt_val);
         public static final LoaderMode kFlipUp   = new LoaderMode (kFlipUp_val);
         public static final LoaderMode kFlipDown = new LoaderMode (kFlipDown_val);
         

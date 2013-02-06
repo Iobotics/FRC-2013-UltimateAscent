@@ -8,10 +8,10 @@ package org.iolani.frc;
  */
 public class RobotMap {
     // drive train //
-    public static final int driveLeftFrontPWM  = 1;
-    public static final int driveLeftRearPWM   = 2;
-    public static final int driveRightFrontPWM = 3;
-    public static final int driveRightRearPWM  = 4;
+    public static final int driveLeftFrontPWM  = 2;
+    public static final int driveLeftRearPWM   = 4;
+    public static final int driveRightFrontPWM = 1;
+    public static final int driveRightRearPWM  = 3;
     
     // intake //
     public static final int intakePWM = 5;

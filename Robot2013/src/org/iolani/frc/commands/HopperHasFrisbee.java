@@ -4,24 +4,19 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Conveyor;
-
 /**
  *
  * @author iobotics
  */
-public class BottomLoader extends CommandBase {
+public class HopperHasFrisbee extends CommandBase {
     
-    private Conveyor.ConveyorMode _mode;
-    
-    public BottomLoader(Conveyor.ConveyorMode mode) {
-        requires(loader);
-        _mode = mode;
+    public HopperHasFrisbee() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        loader.setConveyor(_mode);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -30,12 +25,7 @@ public class BottomLoader extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(loader.getConveyorMode() == Conveyor.ConveyorMode.kDown)
-            return (sensors.getBetweenFlipperLoader());
-        else if(loader.getConveyorMode() == Conveyor.ConveyorMode.kUp)
-            return (sensors.getAfterLoader());
-        else
-            return true;
+        return false;
     }
 
     // Called once after isFinished returns true
