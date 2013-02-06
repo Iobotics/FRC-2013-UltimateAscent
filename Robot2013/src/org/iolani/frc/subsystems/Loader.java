@@ -4,9 +4,10 @@
  */
 package org.iolani.frc.subsystems;
 
+import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
 import org.iolani.frc.util.*;
 /**
@@ -14,52 +15,46 @@ import org.iolani.frc.util.*;
  * @author Hobbes
  */
 public class Loader extends Conveyor {
+    private CANJaguar _lever;
     private LoaderMode _loaderMode;
-    private boolean hasFrisbeeSwitch;
-    private boolean frisbeeCenteredSwitch; //frisbee centered in loader conveyor
-    private boolean chamberedSwitch; //loader in shooter position
-    private boolean safetiedSwitch;  //loader in safety position (positioned in conveyor system)
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
+    private static DigitalInput _chamberedSwitch; //loader in shooter position
+    private static DigitalInput _stowedSwitch;  //loader in safety position (positioned in conveyor system)
     
-    public Loader(int channel) {
-        super(channel);
+    public void init() {
+        super.init();
+        // initialize belt actuator //
+        // initialize lever actuator //
+        // initialize chambered sensor //
+        // initialize stowed sensor //
     }
     
-    public boolean hasFrisbee() {
-        hasFrisbeeSwitch = false; //replace with sensor check for frisbee
-        return hasFrisbeeSwitch;
-    }
-    
-    public boolean centeredFrisbee() {
-        frisbeeCenteredSwitch = false; //replace with sensor check for frisbee
-        return frisbeeCenteredSwitch;
+    public Loader(int beltChannel, int leverChannel) {
+        super(beltChannel);
+        _lever = Utility.createJaguar("_lever", leverChannel);
     }
     
     public boolean loaderChambered() {
-        chamberedSwitch = false;
-        return chamberedSwitch;
+        return _chamberedSwitch.get();
     }
     
-    public boolean loaderSafetied() {
-        safetiedSwitch = false;
-        return safetiedSwitch;
+    public boolean loaderStowed() {
+        return _stowedSwitch.get();
     }
     
     public boolean loaderTransitioning() {
-        return !(loaderSafetied() || loaderChambered());
+        return !(loaderStowed() || loaderChambered());
     }
     
-    public LoaderMode getLoaderMode() {
+    public LoaderMode getLoader() {
         return _loaderMode;
     }
     
     public void setLoader(LoaderMode mode) {
         if (_loaderMode == mode) return;
         switch (mode.value) {
-            //case LoaderMode.kHalt_val:
+            case LoaderMode.kHalt_val:
                 //either brake actuator or set to 0.0
-            //    break;
+                break;
             case LoaderMode.kFlipUp_val:
                 //set actuator to 1.0
                 break;
@@ -76,13 +71,13 @@ public class Loader extends Conveyor {
     }
         
     public static final class LoaderMode {
-        //public static final int kHalt_val     = 0;
+        public static final int kHalt_val     = 0;
         public static final int kFlipUp_val   = 1;
         public static final int kFlipDown_val = 2;
         
-        //public static final LoaderMode kHalt     = new LoaderMode (kHalt_val);
-        public static final LoaderMode kFlipUp   = new LoaderMode (kFlipUp_val);
-        public static final LoaderMode kFlipDown = new LoaderMode (kFlipDown_val);
+        public static final LoaderMode kHalt     = new LoaderMode(kHalt_val);
+        public static final LoaderMode kFlipUp   = new LoaderMode(kFlipUp_val);
+        public static final LoaderMode kFlipDown = new LoaderMode(kFlipDown_val);
         
         private final int value;
         private LoaderMode(int val) {

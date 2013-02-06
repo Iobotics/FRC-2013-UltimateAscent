@@ -13,7 +13,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hopper extends Conveyor {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public Hopper(int channel){
+    
+    public void init() {
+        super.init();
+    }
+    
+    public Hopper(int channel) {
         super(channel);
     }
 

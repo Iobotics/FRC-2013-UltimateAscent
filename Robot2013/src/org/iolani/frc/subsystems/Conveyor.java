@@ -14,15 +14,31 @@ import org.iolani.frc.util.*;
  * @author iobotics
  */
 public class Conveyor extends Subsystem {
-    private ConveyorMode _conveyorMode;
+    protected boolean hasFrisbeeSwitch;
+    protected ConveyorMode _conveyorMode;
+    protected Victor _victor;
     
-    public Conveyor(int channel){
-        
+    public void init() {
+        hasFrisbeeSwitch = false;
+        _conveyorMode = ConveyorMode.kOff;
+    }
+    
+    protected Conveyor(int channel) {
+        _victor = new Victor(channel);
     }
     
     public ConveyorMode getConveyorMode() {
         return _conveyorMode;
     }
+    
+    public boolean hasFrisbee() { //replace with sensor check for frisbee
+        return hasFrisbeeSwitch;
+    }
+    
+    public void setFrisbee(boolean frisbee) {
+        hasFrisbeeSwitch = frisbee;
+    }
+    
     public void setConveyor(ConveyorMode mode) {
         if (_conveyorMode == mode) return;
         switch (mode.value) {
@@ -46,7 +62,8 @@ public class Conveyor extends Subsystem {
         this.setConveyor(ConveyorMode.kOff);
     }
     
-    public static final class ConveyorMode {
+    // Until WPI updates its library from 1.3 to 1.5 we're stuck with this instead of enums. //
+    public static final class ConveyorMode { 
         // int values //
         public static final int kOff_val  = 0;
         public static final int kUp_val   = 1;
