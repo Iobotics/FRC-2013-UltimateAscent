@@ -16,12 +16,12 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static Drivetrain drivetrain = new Drivetrain();
-    public static Intake intake = new Intake(RobotMap.intakePWM);
-    public static Loader loader = new Loader(RobotMap.loaderConveyorPWM, RobotMap.loaderLeverJaguarID);
-    public static Flipper flipper = new Flipper(RobotMap.flipperConveyorPWM, RobotMap.flipperTwisterJaguarID);
-    public static Hopper hopper = new Hopper(RobotMap.conveyorVictorPWM);
-    public static Shooter shooter = new Shooter();
-    public static Sensors sensors = new Sensors();
+    public static Intake intake = null; //new Intake(RobotMap.intakePWM);
+    public static Loader loader = null;//new Loader(RobotMap.loaderConveyorPWM, RobotMap.loaderLeverJaguarID);
+    public static Flipper flipper = null;//new Flipper(RobotMap.flipperConveyorPWM, RobotMap.flipperTwisterJaguarID);
+    public static Hopper hopper = null;//new Hopper(RobotMap.conveyorVictorPWM);
+    public static Shooter shooter = null;//new Shooter();
+    public static Sensors sensors = null;//new Sensors();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
