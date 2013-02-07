@@ -12,6 +12,8 @@ import org.iolani.frc.util.*;
  */
 public class OperatorDrive extends CommandBase {
     
+    private static final double DEADBAND = 0.05;
+    
     public OperatorDrive() {
         requires(drivetrain);
     }
@@ -30,6 +32,9 @@ public class OperatorDrive extends CommandBase {
             mag = scale.get(mag);
             rot = scale.get(rot);
         }
+        if(Math.abs(mag) < DEADBAND) { mag = 0.0; }
+        if(Math.abs(rot) < DEADBAND) { rot = 0.0; }
+        
         drivetrain.setMecanum(mag, dir, rot);
     }
 

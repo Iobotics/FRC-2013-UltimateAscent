@@ -31,11 +31,11 @@ public abstract class CommandBase extends Command {
         // news. Don't move it.
         oi = new OI();
         
-        intake.init();
+        /*intake.init();
         hopper.init();
         flipper.init();
         loader.init();
-        shooter.init();
+        shooter.init();*/
         drivetrain.init();
 
         // Show what command your subsystem is running on the SmartDashboard
