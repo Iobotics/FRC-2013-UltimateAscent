@@ -4,24 +4,24 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Loader;
+import org.iolani.frc.subsystems.Conveyor;
 
 /**
  *
  * @author Hobbes
  */
-public class LoaderBottomEject extends CommandBase {
-    boolean transitionSwitch;
-    boolean changeInFrisbeeState;
-    public LoaderBottomEject() {
-        requires(loader);
+public class EjectAboveFlipper extends EjectFromConveyor {
+    
+    public EjectAboveFlipper() {
+        super(flipper);
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        transitionSwitch = false;
-        changeInFrisbeeState = false;
-        loader.setConveyor(Loader.ConveyorMode.kDown);
+        super.initialize();
+        flipper.setConveyor(Conveyor.ConveyorMode.kUp);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,18 +32,17 @@ public class LoaderBottomEject extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (!loader.hasFrisbee() || changeInFrisbeeState);
+        return super.isFinished();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        loader.setFrisbee(false);
-        loader.setConveyor(Loader.ConveyorMode.kOff);
+        super.end();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        loader.setConveyor(Loader.ConveyorMode.kOff);
+        super.interrupted();
     }
 }
