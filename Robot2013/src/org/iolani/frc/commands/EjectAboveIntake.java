@@ -21,7 +21,7 @@ public class EjectAboveIntake extends EjectFromConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        intake.setConveyor(Conveyor.ConveyorMode.kUp);
+        intake.setConveyor(Conveyor.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run

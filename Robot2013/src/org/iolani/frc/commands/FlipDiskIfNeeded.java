@@ -8,11 +8,10 @@ package org.iolani.frc.commands;
  *
  * @author iobotics
  */
-public class FlipDisk extends CommandBase {
+public class FlipDiskIfNeeded extends CommandBase {
     
-    public FlipDisk() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public FlipDiskIfNeeded() {
+        requires(flipper);
     }
 
     // Called just before this Command runs the first time

@@ -21,7 +21,7 @@ public class EjectAboveFlipper extends EjectFromConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        flipper.setConveyor(Conveyor.ConveyorMode.kUp);
+        flipper.setConveyor(Conveyor.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run

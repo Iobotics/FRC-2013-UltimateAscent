@@ -21,7 +21,7 @@ public class AquireAboveIntake extends AquireIntoConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        intake.setConveyor(Conveyor.ConveyorMode.kDown);
+        intake.setConveyor(Conveyor.ConveyorMode.kDown, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run

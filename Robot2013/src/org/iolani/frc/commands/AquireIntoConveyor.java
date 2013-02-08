@@ -36,14 +36,14 @@ public class AquireIntoConveyor extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff);
+        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff, 0);
         _conveyor.setFrisbee(true);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff);
+        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff, 0);
         System.out.println(_conveyor + " Frisbee aquire command interrupted");
     }
 }

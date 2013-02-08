@@ -22,7 +22,7 @@ public class AquireBelowFlipper extends AquireIntoConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        flipper.setConveyor(Flipper.ConveyorMode.kUp);
+        flipper.setConveyor(Flipper.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run

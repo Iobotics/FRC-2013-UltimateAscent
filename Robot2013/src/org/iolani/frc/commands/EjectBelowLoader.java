@@ -4,6 +4,7 @@
  */
 package org.iolani.frc.commands;
 
+import org.iolani.frc.subsystems.Conveyor;
 import org.iolani.frc.subsystems.Loader;
 
 /**
@@ -18,7 +19,7 @@ public class EjectBelowLoader extends EjectFromConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        loader.setConveyor(Loader.ConveyorMode.kDown);
+        loader.setConveyor(Loader.ConveyorMode.kDown, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run

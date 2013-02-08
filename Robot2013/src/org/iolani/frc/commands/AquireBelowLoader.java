@@ -6,6 +6,7 @@ package org.iolani.frc.commands;
 
 
 import org.iolani.frc.subsystems.Loader;
+import org.iolani.frc.subsystems.Conveyor;
 
 /**
  *
@@ -19,7 +20,7 @@ public class AquireBelowLoader extends AquireIntoConveyor {
     // Called just before this Command runs the first time
     protected void initialize() {
         super.initialize();
-        loader.setConveyor(Loader.ConveyorMode.kUp);
+        loader.setConveyor(Loader.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run
