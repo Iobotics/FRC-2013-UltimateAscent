@@ -4,45 +4,42 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Conveyor;
-
 /**
  *
- * @author Hobbes
+ * @author iobotics
  */
-public class EjectAboveIntake extends EjectFromConveyor {
+public class RetractBatWings extends CommandBase {
     
-    public EjectAboveIntake() {
-        super(intake);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    private static final double DEPLOY_TIME = 0.75;
+    private boolean _wait;
+
+    public RetractBatWings() {
+        requires(batWings);
+        requires(pneumatics);
+        setTimeout(DEPLOY_TIME);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-        super.initialize();
-        intake.setConveyor(Conveyor.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
+    protected void initialize() { // make more robust
+        _wait = (batWings.isDeployed());
+        batWings.setDeployed(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        transitionSwitch = (sensors.getBetweenIntakeHopper() || transitionSwitch);
-        changeInFrisbeeState = (transitionSwitch && !sensors.getBetweenIntakeHopper());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return super.isFinished();
+        return (_wait) ? isTimedOut() : true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        super.end();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        super.interrupted();
     }
 }

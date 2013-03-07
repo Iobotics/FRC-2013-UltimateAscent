@@ -4,45 +4,45 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Conveyor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import org.iolani.frc.commands.CommandBase;
 
 /**
  *
- * @author Hobbes
+ * @author iobotics
  */
-public class AquireAboveIntake extends AquireIntoConveyor {
+public class RetractHanger extends CommandBase {
     
-    public AquireAboveIntake() {
-        super(intake);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    private static final double DEPLOY_TIME = 0.75;                 //CHANGE
+    private boolean _wait;
+    
+    public RetractHanger() {
+        requires(hanger);
+        requires(pneumatics);
+        setTimeout(DEPLOY_TIME);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        super.initialize();
-        intake.setConveyor(Conveyor.ConveyorMode.kDown, Conveyor.ConveyorMode.kSlow);
+        _wait = (hanger.isDeployed());
+        hanger.setDeployed(false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        transitionSwitch = (sensors.getBetweenIntakeHopper() || transitionSwitch);
-        changeInFrisbeeState = transitionSwitch;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return super.isFinished();
+        return (_wait) ? isTimedOut() : true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        super.end();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        super.interrupted();
     }
 }

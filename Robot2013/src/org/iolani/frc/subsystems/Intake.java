@@ -4,7 +4,7 @@
  */
 package org.iolani.frc.subsystems;
 
-//import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
 import org.iolani.frc.subsystems.Conveyor;
@@ -14,30 +14,32 @@ import org.iolani.frc.util.*;
  *
  * @author iobotics
  */
-public class Intake extends Conveyor {
-    //private static Victor _victor;
+public class Intake extends Subsystem {
+    private Victor _victor;
     //private double _power;
     //private IntakeMode _mode;
 
     
     public void init() {
-        super.init();
+        this.setPower(0);
     }
     
     public Intake(int channel) {
-        super(channel);
+        _victor = new Victor(channel);
     }
     
-    /*public void setIntakePower(double pwr) {
-        _power = pwr;
+    public void setPower(double pwr) {
         _victor.set(pwr);
     }
     
     public double getPower() {
-        return _power;
+        return _victor.get();
     }
     
-    public void setIntake(IntakeMode mode) {
+    public void initDefaultCommand() {
+    }
+    
+    /*public void setIntake(IntakeMode mode) {
         if(_mode == mode) return; 
         switch(mode.value) {
             case IntakeMode.kOff_val:
@@ -73,9 +75,7 @@ public class Intake extends Conveyor {
         }
     }
     
-    public void initDefaultCommand() {
-        this.setIntake(IntakeMode.kOff);
-    }
+    
     */
     
 }

@@ -39,17 +39,17 @@ public class Conveyor extends Subsystem {
         hasFrisbeeSwitch = frisbee;
     }
     
-    public void setConveyor(ConveyorMode mode) {
+    public void setConveyor(ConveyorMode mode, double speed) {
         if (_conveyorMode == mode) return;
         switch (mode.value) {
             case ConveyorMode.kOff_val:
-                //setPower(0.0);
+                //setPower(0);
                 break;
             case ConveyorMode.kUp_val:
-                //setPower(1.0);
+                //setPower(speed);
                 break;
             case ConveyorMode.kDown_val:
-                //setPower(-1.0);
+                //setPower(-speed);
                 break;
         }
         _conveyorMode = mode;
@@ -59,7 +59,7 @@ public class Conveyor extends Subsystem {
     //}
     
     public void initDefaultCommand() {
-        this.setConveyor(ConveyorMode.kOff);
+        this.setConveyor(ConveyorMode.kOff, 0);
     }
     
     // Until WPI updates its library from 1.3 to 1.5 we're stuck with this instead of enums. //
@@ -68,6 +68,10 @@ public class Conveyor extends Subsystem {
         public static final int kOff_val  = 0;
         public static final int kUp_val   = 1;
         public static final int kDown_val = 2;
+        // speeds //
+        public static final double kSlow = 0.25;
+        public static final double kMed  = 0.50;
+        public static final double kFast = 1.00;
         // singletons //
         public static final ConveyorMode kOff  = new ConveyorMode(kOff_val);
         public static final ConveyorMode kUp   = new ConveyorMode(kUp_val);

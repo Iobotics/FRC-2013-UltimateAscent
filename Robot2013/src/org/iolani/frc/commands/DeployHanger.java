@@ -4,25 +4,28 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Conveyor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import org.iolani.frc.commands.CommandBase;
 
 /**
  *
- * @author Hobbes
+ * @author iobotics
  */
-public class EjectFromConveyor extends CommandBase {
-    protected boolean transitionSwitch;
-    protected boolean changeInFrisbeeState;
-    protected Conveyor _conveyor;
-    public EjectFromConveyor(Conveyor belt) {
-        _conveyor = belt;
-        requires(_conveyor);
+public class DeployHanger extends CommandBase {
+    
+    private static final double DEPLOY_TIME = 0.75;                 //CHANGE
+    private boolean _wait;
+    
+    public DeployHanger() {
+        requires(hanger);
+        requires(pneumatics);
+        setTimeout(DEPLOY_TIME);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        transitionSwitch = false;
-        changeInFrisbeeState = false;
+        _wait = (!hanger.isDeployed());
+        hanger.setDeployed(true);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,19 +34,15 @@ public class EjectFromConveyor extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (!_conveyor.hasFrisbee() || changeInFrisbeeState);
+        return (_wait) ? isTimedOut() : true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff, 0);
-        _conveyor.setFrisbee(false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        _conveyor.setConveyor(Conveyor.ConveyorMode.kOff, 0);
-        System.out.println(_conveyor + " Frisbee eject command interrupted");
     }
 }

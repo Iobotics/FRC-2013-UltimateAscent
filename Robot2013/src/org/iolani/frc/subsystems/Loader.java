@@ -4,10 +4,9 @@
  */
 package org.iolani.frc.subsystems;
 
-import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Solenoid;
 import org.iolani.frc.RobotMap;
 import org.iolani.frc.util.*;
 /**
@@ -15,7 +14,7 @@ import org.iolani.frc.util.*;
  * @author Hobbes
  */
 public class Loader extends Conveyor {
-    private CANJaguar _lever;
+    private Solenoid _valve;
     private LoaderMode _loaderMode;
     private static DigitalInput _chamberedSwitch; //loader in shooter position
     private static DigitalInput _stowedSwitch;  //loader in safety position (positioned in conveyor system)
@@ -28,9 +27,9 @@ public class Loader extends Conveyor {
         // initialize stowed sensor //
     }
     
-    public Loader(int beltChannel, int leverChannel) {
+    public Loader(int beltChannel, int valveChannel) {
         super(beltChannel);
-        _lever = Utility.createJaguar("_lever", leverChannel);
+        _valve = new Solenoid(valveChannel);
     }
     
     public boolean loaderChambered() {

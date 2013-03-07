@@ -16,13 +16,16 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static Drivetrain drivetrain = new Drivetrain();
-    public static Intake intake = null; //new Intake(RobotMap.intakePWM);
-    public static Loader loader = null;//new Loader(RobotMap.loaderConveyorPWM, RobotMap.loaderLeverJaguarID);
-    public static Flipper flipper = null;//new Flipper(RobotMap.flipperConveyorPWM, RobotMap.flipperTwisterJaguarID);
-    public static Hopper hopper = null;//new Hopper(RobotMap.conveyorVictorPWM);
+    public static Intake intake = new Intake(RobotMap.intakePWM);
+    public static Loader loader = new Loader(RobotMap.loaderPWM, RobotMap.loaderValve);
+    public static Flipper flipper = new Flipper(RobotMap.flipperPWM, RobotMap.flipperValve1, RobotMap.flipperValve2);
+    public static Hopper hopper = new Hopper(RobotMap.hopperPWM);
     public static Shooter shooter = null;//new Shooter();
     public static Sensors sensors = null;//new Sensors();
-
+    public static BatWings batWings = new BatWings();
+    public static Hanger hanger = new Hanger();
+    public static Pneumatics pneumatics = new Pneumatics(RobotMap.compressorRelay, RobotMap.pressureSwitch);
+    
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
         // will), constructing it during the construction of CommandBase (from
@@ -31,10 +34,11 @@ public abstract class CommandBase extends Command {
         // news. Don't move it.
         oi = new OI();
         
-        /*intake.init();
+        pneumatics.init();
+        intake.init();
         hopper.init();
         flipper.init();
-        loader.init();
+        /*loader.init();
         shooter.init();*/
         drivetrain.init();
 

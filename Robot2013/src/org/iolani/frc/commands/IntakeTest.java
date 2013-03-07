@@ -4,45 +4,40 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.Conveyor;
-
 /**
  *
- * @author Hobbes
+ * @author iobotics
  */
-public class EjectAboveFlipper extends EjectFromConveyor {
+public class IntakeTest extends CommandBase {
     
-    public EjectAboveFlipper() {
-        super(flipper);
+    public IntakeTest() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+        requires(intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        super.initialize();
-        flipper.setConveyor(Conveyor.ConveyorMode.kUp, Conveyor.ConveyorMode.kSlow);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        transitionSwitch = (sensors.getBetweenFlipperLoader() || transitionSwitch);
-        changeInFrisbeeState = (transitionSwitch && !sensors.getBetweenFlipperLoader());
+        intake.setPower(oi.getLeftStick().getTwist());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return super.isFinished();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-        super.end();
+        intake.setPower(0.0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-        super.interrupted();
+        this.end();
     }
 }

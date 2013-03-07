@@ -8,26 +8,39 @@ package org.iolani.frc;
  */
 public class RobotMap {
     // drive train //
-    public static final int driveLeftFrontPWM  = 2;
-    public static final int driveLeftRearPWM   = 4;
-    public static final int driveRightFrontPWM = 1;
-    public static final int driveRightRearPWM  = 3;
+    public static final int driveLeftFrontPWM  = 10;
+    public static final int driveLeftRearPWM   = 8;
+    public static final int driveRightFrontPWM = 9;
+    public static final int driveRightRearPWM  = 7;
     
     // intake //
-    public static final int intakePWM = 5;
+    public static final int intakePWM = 2;
     
     // conveyor //
-    public static final int conveyorVictorPWM = 6;
+    public static final int hopperPWM = 3;
     
     // flipper //
-    public static final int flipperConveyorPWM = 7;
-    public static final int flipperTwisterJaguarID = 23;
+    public static final int flipperPWM    = 4;
+    public static final int flipperValve1 = 1;
+    public static final int flipperValve2 = 2;
     
     // loader //
-    public static final int loaderConveyorPWM = 8;
-    public static final int loaderLeverJaguarID = 24;
+    public static final int loaderPWM   = 5;
+    public static final int loaderValve = 3;
+   
     // shooter //
     public static final int shooterStageOneJaguarID   = 20;
     public static final int shooterStageTwoJaguarID   = 21;
     public static final int shooterAltitudeJaguarID   = 22;
+    
+    // bat wings //
+    public static final int batWingsSolenoid = 0;         //CHANGE CHANGE
+    
+    // hanger //
+    public static final int hangerValve1 = 4;
+    public static final int hangerValve2 = 5;
+    
+    // pneumatics //
+    public static final int compressorRelay = 8;
+    public static final int pressureSwitch  = 1;
 }
