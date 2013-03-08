@@ -4,28 +4,22 @@
  */
 package org.iolani.frc.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import org.iolani.frc.commands.CommandBase;
-
 /**
  *
  * @author iobotics
  */
-public class DeployHanger extends CommandBase {
+public class SetBatDeployed extends CommandBase {
     
-    private static final double DEPLOY_TIME = 0.75;                 //CHANGE
-    private boolean _wait;
+    private final boolean _state;
     
-    public DeployHanger() {
-        requires(hanger);
-        requires(pneumatics);
-        setTimeout(DEPLOY_TIME);
+    public SetBatDeployed(boolean state) {
+        requires(batWings);
+        _state = state;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        _wait = (!hanger.isDeployed());
-        hanger.setDeployed(true);
+        batWings.setDeployed(_state);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,7 +28,7 @@ public class DeployHanger extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (_wait) ? isTimedOut() : true;
+        return true;
     }
 
     // Called once after isFinished returns true

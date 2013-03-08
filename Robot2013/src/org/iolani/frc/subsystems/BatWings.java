@@ -13,19 +13,17 @@ import org.iolani.frc.RobotMap;
  */
 public class BatWings extends Subsystem {
     private Solenoid _solenoid = new Solenoid(RobotMap.batWingsSolenoid);
-    private boolean _deployed;
+    
+    public void init() {
+        setDeployed(false);
+    }
     
     public void setDeployed(boolean state) {
-        if(state) {
-            _solenoid.set(true);
-        } else {
-            _solenoid.set(false);
-        }
-        _deployed = state;
-    } //values might need to be more robust //
+        _solenoid.set(state);
+    }
 
     public boolean isDeployed() {
-        return _deployed;
+        return _solenoid.get();
     }
     
     public void initDefaultCommand() {

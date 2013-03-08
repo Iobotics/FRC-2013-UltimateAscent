@@ -12,6 +12,14 @@ public class RobotMap {
     public static final int driveLeftRearPWM   = 8;
     public static final int driveRightFrontPWM = 9;
     public static final int driveRightRearPWM  = 7;
+    public static final int driveLFEncoderA = 7;
+    public static final int driveLFEncoderB = 6;
+    public static final int driveLREncoderA = 5;
+    public static final int driveLREncoderB = 4;
+    public static final int driveRFEncoderA = 3;
+    public static final int driveRFEncoderB = 2;
+    public static final int driveRREncoderA = 8;
+    public static final int driveRREncoderB = 9;
     
     // intake //
     public static final int intakePWM = 2;
@@ -34,11 +42,11 @@ public class RobotMap {
     public static final int shooterAltitudeJaguarID   = 22;
     
     // bat wings //
-    public static final int batWingsSolenoid = 0;         //CHANGE CHANGE
+    public static final int batWingsSolenoid = 6;
     
     // hanger //
-    public static final int hangerValve1 = 4;
-    public static final int hangerValve2 = 5;
+    public static final int hangerValve1 = 8;
+    public static final int hangerValve2 = 7;
     
     // pneumatics //
     public static final int compressorRelay = 8;

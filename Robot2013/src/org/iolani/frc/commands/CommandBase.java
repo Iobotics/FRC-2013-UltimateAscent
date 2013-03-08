@@ -36,11 +36,14 @@ public abstract class CommandBase extends Command {
         
         pneumatics.init();
         intake.init();
-        hopper.init();
-        flipper.init();
+        //hopper.init();
+        //flipper.init();
         /*loader.init();
         shooter.init();*/
         drivetrain.init();
+        batWings.init();
+        hanger.init();
+        
 
         // Show what command your subsystem is running on the SmartDashboard
         SmartDashboard.putData(drivetrain);

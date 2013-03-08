@@ -14,19 +14,23 @@ import org.iolani.frc.RobotMap;
  */
 public class Hanger extends Subsystem {
     private DoubleSolenoid _solenoid = new DoubleSolenoid(RobotMap.hangerValve1, RobotMap.hangerValve2);
-    private boolean _deployed;
+    private boolean _retracted;
     
-    public void setDeployed(boolean state) {
+    public void init() {
+        setRetracted(false);
+    }
+    
+    public void setRetracted(boolean state) {
         if(state) {
             _solenoid.set(DoubleSolenoid.Value.kForward);
         } else {
             _solenoid.set(DoubleSolenoid.Value.kReverse);
         }
-        _deployed = state;
+        _retracted = state;
     }
 
-    public boolean isDeployed() {
-        return _deployed;
+    public boolean isRetracted() {
+        return _retracted;
     }
     
     public void initDefaultCommand() {

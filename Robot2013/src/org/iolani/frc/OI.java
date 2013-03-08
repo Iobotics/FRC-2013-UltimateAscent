@@ -18,8 +18,9 @@ public class OI {
     private final Joystick _rStick = new Joystick(2);
     
     private final Button _intakeButton = new JoystickButton(_lStick, 1);
-    private final Button _batWingsButton = new JoystickButton(_rStick, 1);
-    private final Button _hangerButton = new JoystickButton(_rStick, 2);
+    private final Button _batWingsButton = new JoystickButton(_rStick, 4);
+    private final Button _hangerUnretractButton = new JoystickButton(_lStick, 4);
+    private final Button _hangerRetractButton = new JoystickButton(_lStick, 5);
     
     public Joystick getLeftStick() {
         return _lStick;
@@ -35,21 +36,22 @@ public class OI {
         return _driveScaler;
     }
     
+    public boolean getBatWingsButton() {
+        return _batWingsButton.get();
+    }
+    
     public OI() {
         _intakeButton.whileHeld(new IntakeTest());
-        if(CommandBase.batWings.isDeployed()) {
-            _batWingsButton.whenPressed(new RetractBatWings());
-        }
-        else {
-            _batWingsButton.whenPressed(new DeployBatWings());
-        }
+        _batWingsButton.whenPressed(new ToggleBatDeployed());
         
-        if(CommandBase.hanger.isDeployed()) {
-            _hangerButton.whenPressed(new RetractHanger());
-        }
-        else {
-            _hangerButton.whenPressed(new DeployHanger());
-        }
+        _hangerUnretractButton.whenPressed(new SetHangerRetracted(false));
+        _hangerRetractButton.whenPressed(new SetHangerRetracted(true));
+        
+        _driveScaler = new PowerScaler(new PowerScaler.PowerPoint[] {
+                new PowerScaler.PowerPoint(0.05, 0.0),
+                new PowerScaler.PowerPoint(0.8, 0.5),
+                new PowerScaler.PowerPoint(0.95, 1.0)
+            });
     }
 }
 
