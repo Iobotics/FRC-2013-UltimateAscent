@@ -12,14 +12,15 @@ public class RobotMap {
     public static final int driveLeftRearPWM   = 8;
     public static final int driveRightFrontPWM = 9;
     public static final int driveRightRearPWM  = 7;
-    public static final int driveLFEncoderA = 7;
-    public static final int driveLFEncoderB = 6;
-    public static final int driveLREncoderA = 5;
-    public static final int driveLREncoderB = 4;
-    public static final int driveRFEncoderA = 3;
-    public static final int driveRFEncoderB = 2;
-    public static final int driveRREncoderA = 8;
-    public static final int driveRREncoderB = 9;
+    public static final int driveLFEncoderA = 9;
+    public static final int driveLFEncoderB = 8;
+    public static final int driveLREncoderA = 3;
+    public static final int driveLREncoderB = 2;
+    public static final int driveRFEncoderA = 6;
+    public static final int driveRFEncoderB = 7;
+    public static final int driveRREncoderA = 5;
+    public static final int driveRREncoderB = 4;
+    public static final int driveGyro = 2;
     
     // intake //
     public static final int intakePWM = 2;

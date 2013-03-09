@@ -5,10 +5,8 @@
 package org.iolani.frc.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
-import org.iolani.frc.RobotMap;
-import org.iolani.frc.util.*;
+
 /**
  *
  * @author Hobbes
@@ -21,10 +19,6 @@ public class Loader extends Conveyor {
     
     public void init() {
         super.init();
-        // initialize belt actuator //
-        // initialize lever actuator //
-        // initialize chambered sensor //
-        // initialize stowed sensor //
     }
     
     public Loader(int beltChannel, int valveChannel) {
@@ -49,7 +43,9 @@ public class Loader extends Conveyor {
     }
     
     public void setLoader(LoaderMode mode) {
-        if (_loaderMode == mode) return;
+        if (_loaderMode == mode) {
+            return;
+        }
         switch (mode.value) {
             case LoaderMode.kHalt_val:
                 //either brake actuator or set to 0.0

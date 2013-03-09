@@ -4,35 +4,42 @@
  */
 package org.iolani.frc.commands;
 
+import org.iolani.frc.subsystems.Drivetrain;
+
 /**
  *
  * @author iobotics
  */
-public class FlipDiskIfNeeded extends CommandBase {
+public class AutoTurn extends CommandBase {
     
-    public FlipDiskIfNeeded() {
-        requires(flipper);
+    private final double _degrees;
+    
+    public AutoTurn(double degrees) {
+        requires(drivetrain);
+        _degrees = degrees;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        drivetrain.autoBeginTurn(_degrees);
+        System.out.println("AutoTurn (begin): " + _degrees);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return drivetrain.autoIsComplete();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+        drivetrain.autoEnd();
+        System.out.println("AutoTurn (end): " + _degrees);
     }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    
     protected void interrupted() {
+        this.end();
     }
 }

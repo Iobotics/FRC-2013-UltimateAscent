@@ -12,7 +12,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.iolani.frc.commands.CommandBase;
+import org.iolani.frc.commands.*;
+import org.iolani.frc.commands.autoprograms.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,14 +32,17 @@ public class Robot2013 extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-
+        //autonomousCommand = new AutoTest();
+        
         // Initialize all subsystems
         CommandBase.init();
     }
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        //autonomousCommand.start();
+        if(autonomousCommand != null) {
+            autonomousCommand.start();
+        }
     }
 
     /**

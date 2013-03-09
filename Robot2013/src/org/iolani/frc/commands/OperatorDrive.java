@@ -4,6 +4,7 @@
  */
 package org.iolani.frc.commands;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import org.iolani.frc.util.*;
 
 /**
@@ -13,6 +14,7 @@ import org.iolani.frc.util.*;
 public class OperatorDrive extends CommandBase {
     
     private static final double DEADBAND = 0.05;
+    private static final double SLOW_MODE = 0.3;
     
     public OperatorDrive() {
         requires(drivetrain);
@@ -20,6 +22,7 @@ public class OperatorDrive extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        drivetrain.startEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,6 +37,15 @@ public class OperatorDrive extends CommandBase {
         }
         if(Math.abs(mag) < DEADBAND) { mag = 0.0; }
         if(Math.abs(rot) < DEADBAND) { rot = 0.0; }
+        
+        if(oi.getSlowModeButton()) {
+                mag = SLOW_MODE * mag;
+                rot = SLOW_MODE * rot;
+        }
+        
+        //System.out.println(mag + " , " + dir + " , " + rot);
+        //System.out.println("LR: " + drivetrain.getLeftRearEncoder() + ", RR: " + drivetrain.getRightRearEncoder());
+        drivetrain.debug();
         
         drivetrain.setMecanum(mag, dir, rot);
     }

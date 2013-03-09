@@ -49,6 +49,5 @@ public class Flipper extends Conveyor {
     }
     
     public void initDefaultCommand() {
-        this.setConveyor(Conveyor.ConveyorMode.kOff, 0);
     }
 }

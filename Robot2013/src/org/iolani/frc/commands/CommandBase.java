@@ -38,8 +38,8 @@ public abstract class CommandBase extends Command {
         intake.init();
         //hopper.init();
         //flipper.init();
-        /*loader.init();
-        shooter.init();*/
+        loader.init();
+        //shooter.init();
         drivetrain.init();
         batWings.init();
         hanger.init();
