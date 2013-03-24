@@ -40,7 +40,8 @@ public class RobotMap {
     // shooter //
     public static final int shooterStageOneJaguarID   = 20;
     public static final int shooterStageTwoJaguarID   = 21;
-    public static final int shooterAltitudeJaguarID   = 22;
+    public static final int shooterStageThreeJaguarID = 22;
+    public static final int shooterAltitudeJaguarID   = 23;
     
     // bat wings //
     public static final int batWingsSolenoid = 6;

@@ -21,6 +21,7 @@ public abstract class CommandBase extends Command {
     public static Flipper flipper = new Flipper(RobotMap.flipperPWM, RobotMap.flipperValve1, RobotMap.flipperValve2);
     public static Hopper hopper = new Hopper(RobotMap.hopperPWM);
     public static Shooter shooter = null;//new Shooter();
+    public static FiringPiston firingPiston = null;
     public static Sensors sensors = null;//new Sensors();
     public static BatWings batWings = new BatWings();
     public static Hanger hanger = new Hanger();
