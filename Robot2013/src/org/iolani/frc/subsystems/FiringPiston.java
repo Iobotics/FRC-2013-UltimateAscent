@@ -34,6 +34,5 @@ public class FiringPiston extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        setFired(false);
     }
 }

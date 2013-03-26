@@ -10,14 +10,14 @@ import org.iolani.frc.subsystems.Shooter;
  *
  * @author Hobbes
  */
-public class AimShooter extends CommandBase {
+public class AutoAimShooter extends CommandBase {
     private static final double[] altitudeChart = {0,0,0,0,0};
     private static final int MAX_RANGE = 4;
     private static final int MIN_RANGE = 2;
     private double targetDistance;
     private double altitude;
     
-    public AimShooter(double targetDistance) {
+    public AutoAimShooter(double targetDistance) {
         this.targetDistance = targetDistance;
         requires(shooter);
     }
@@ -50,6 +50,7 @@ public class AimShooter extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
+        System.out.println("Shooter LOCKED ON");
     }
 
     // Called when another command which requires one or more of the same

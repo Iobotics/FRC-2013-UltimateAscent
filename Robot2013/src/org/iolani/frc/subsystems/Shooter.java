@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.can.CANTimeoutException;
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
+import org.iolani.frc.commands.StowShooter;
 import org.iolani.frc.util.*;
-import java.lang.Math;
 
 /**
  * Shooter.java
@@ -157,7 +157,7 @@ public class Shooter extends Subsystem {
     }
        
     public void initDefaultCommand() {
-        this.disableShooter();
+        setDefaultCommand(new StowShooter());
     }
     
     public static class ShooterSpeedParameters {
