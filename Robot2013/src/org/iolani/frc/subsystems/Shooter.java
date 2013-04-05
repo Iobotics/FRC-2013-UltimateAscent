@@ -31,7 +31,7 @@ public class Shooter extends Subsystem {
         _atco       = new DoubleSolenoid(RobotMap.shooterAtcoValve1, RobotMap.shooterAtcoValve2);
         
         this.setPower(0.0);
-        this.setAtco(false);
+        this.setElevation(false);
     }
     
     public void setPusher(boolean value) {
@@ -42,7 +42,7 @@ public class Shooter extends Subsystem {
         return _pusher.get();
     }
     
-    public void setAtco(boolean value) {
+    public void setElevation(boolean value) {
         if(value) {
             _atco.set(DoubleSolenoid.Value.kForward);
         } else {
@@ -50,7 +50,7 @@ public class Shooter extends Subsystem {
         }
     }
     
-    public boolean getAtco() {
+    public boolean getElevation() {
         return (_atco.get() == DoubleSolenoid.Value.kForward);
     }
     
