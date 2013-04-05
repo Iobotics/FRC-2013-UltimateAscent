@@ -27,7 +27,7 @@ public class Flipper extends Conveyor {
     
     public Flipper(int conveyorChannel, int flipValve, int unflipValve) {
         super(conveyorChannel);
-        _valve   = new DoubleSolenoid(flipValve, unflipValve);
+        //_valve   = new DoubleSolenoid(flipValve, unflipValve);
         _flipped = false;
     }
     
