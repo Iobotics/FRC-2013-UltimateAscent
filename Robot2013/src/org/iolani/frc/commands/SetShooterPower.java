@@ -4,32 +4,22 @@
  */
 package org.iolani.frc.commands;
 
-import org.iolani.frc.subsystems.*;
-
 /**
  *
  * @author iobotics
  */
-public class SetConveyor extends CommandBase {
+public class SetShooterPower extends CommandBase {
     
-    private final Conveyor               _conv;
-    private final Conveyor.ConveyorMode  _mode;
-    private final Conveyor.ConveyorSpeed _speed;
+    private double _power;
     
-    public SetConveyor(Conveyor conv, Conveyor.ConveyorMode mode) {
-        this(conv, mode, Conveyor.ConveyorSpeed.kFast);
-    }
-    
-    public SetConveyor(Conveyor conv, Conveyor.ConveyorMode mode, Conveyor.ConveyorSpeed speed) {
-        requires(conv);
-        _conv  = conv;
-        _mode  = mode;
-        _speed = speed;
+    public SetShooterPower(double power) {
+        requires(shooter);
+        _power = power;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        _conv.set(_mode, _speed);
+        shooter.setPower(_power);
     }
 
     // Called repeatedly when this Command is scheduled to run
