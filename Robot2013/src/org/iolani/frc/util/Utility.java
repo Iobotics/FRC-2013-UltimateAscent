@@ -53,6 +53,15 @@ public class Utility {
         }
     }
     
+    public static double getJaguar(CANJaguar jag) {
+        try {
+            return jag.getX();
+        } catch(CANTimeoutException e) {
+            System.out.println("Error setting Jaguar: " + jag.toString() + "\n" + e);
+            return Double.NaN;
+        }
+    }
+    
     public static double window(double input, double max) {
         if(input >  max) return  max;
         if(input < -max) return -max;
