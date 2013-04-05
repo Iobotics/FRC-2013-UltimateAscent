@@ -17,12 +17,7 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static Drivetrain drivetrain = new Drivetrain();
     public static Intake intake = new Intake(RobotMap.intakePWM);
-    public static Loader loader = new Loader(RobotMap.loaderPWM, RobotMap.loaderValve);
-    public static Flipper flipper = new Flipper(RobotMap.flipperPWM, RobotMap.flipperValve1, RobotMap.flipperValve2);
-    public static Hopper hopper = new Hopper(RobotMap.hopperPWM);
-    public static Shooter shooter = null;//new Shooter();
-    public static FiringPiston firingPiston = null;
-    public static Sensors sensors = null;//new Sensors();
+    public static Shooter shooter = new Shooter();
     public static BatWings batWings = new BatWings();
     public static Hanger hanger = new Hanger();
     public static Pneumatics pneumatics = new Pneumatics(RobotMap.compressorRelay, RobotMap.pressureSwitch);
@@ -37,10 +32,7 @@ public abstract class CommandBase extends Command {
         
         pneumatics.init();
         intake.init();
-        //hopper.init();
-        //flipper.init();
-        loader.init();
-        //shooter.init();
+        shooter.init();
         drivetrain.init();
         batWings.init();
         hanger.init();
