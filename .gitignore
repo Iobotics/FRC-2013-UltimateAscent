@@ -4,3 +4,5 @@
 *.jar
 *.war
 *.ear
+/Robot2013/nbproject/private/
+/Robot2013/build/
