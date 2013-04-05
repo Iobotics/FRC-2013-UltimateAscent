@@ -35,13 +35,15 @@ public class RobotMap {
     
     // loader //
     public static final int loaderPWM   = 5;
-    public static final int loaderValve = 3;
+    public static final int loaderValve = 2;
    
     // shooter //
-    public static final int shooterStageOneJaguarID   = 20;
-    public static final int shooterStageTwoJaguarID   = 21;
-    public static final int shooterStageThreeJaguarID = 22;
-    public static final int shooterAltitudeJaguarID   = 23;
+    public static final int shooterStageOneJaguarID   = 31;
+    public static final int shooterStageTwoJaguarID   = 20;
+    public static final int shooterStageThreeJaguarID = 21;
+    public static final int shooterPusherValve = 5;
+    public static final int shooterAtcoValve1  = 4;
+    public static final int shooterAtcoValve2  = 3;
     
     // bat wings //
     public static final int batWingsSolenoid = 6;
