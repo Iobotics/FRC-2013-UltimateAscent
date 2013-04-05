@@ -108,7 +108,7 @@ public class Drivetrain extends Subsystem {
     
     public void debug() {
         //System.out.println("2: " + _encoderTest1.get() + ", 3: " + _encoderTest2.get());
-        System.out.println("LF: " + this.getEncoderCount(DrivePod.kLeftFront) + ", RF: " + this.getEncoderCount(DrivePod.kRightFront));
+        //System.out.println("LF: " + this.getEncoderCount(DrivePod.kLeftFront) + ", RF: " + this.getEncoderCount(DrivePod.kRightFront));
         //System.out.println("LR: " + this.getLeftRearPosition() + ", RR: " + this.getRightRearPosition());
         //System.out.println("2: " + _gyroTest1.getVoltage() + ", 3: " + _gyroTest2.getVoltage());
         //System.out.println("Gyro angle: " + _gyro.getAngle() + ", gyro PID angle: " + _gyro.pidGet());
