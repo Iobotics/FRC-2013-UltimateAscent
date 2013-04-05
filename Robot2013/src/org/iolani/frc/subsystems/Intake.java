@@ -6,9 +6,6 @@ package org.iolani.frc.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.iolani.frc.RobotMap;
-import org.iolani.frc.subsystems.Conveyor;
-import org.iolani.frc.util.*;
 
 /**
  *
@@ -74,8 +71,5 @@ public class Intake extends Subsystem {
             value = val;
         }
     }
-    
-    
-    */
-    
+    */    
 }
