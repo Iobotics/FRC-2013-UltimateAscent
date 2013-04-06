@@ -17,10 +17,13 @@ import org.iolani.frc.commands.SetShooterPower;
 public class FireFromPyramid extends CommandGroup {
     
     public FireFromPyramid() {
-        this.addSequential(new SetShooterPower(1.0));
-        this.addSequential(new SetShooterElevation(true));
+        this.addSequential(new SetShooterPower(1.0, true));
+        //this.addSequential(new SetShooterElevation(true));
         this.addSequential(new WaitCommand(3.0));
         this.addSequential(new FireFrisbee());
+        this.addSequential(new WaitCommand(1.0));
+        this.addSequential(new FireFrisbee());
+        this.addSequential(new WaitCommand(1.0));
         this.addSequential(new FireFrisbee());
         this.addSequential(new SetShooterPower(0.0));
     }

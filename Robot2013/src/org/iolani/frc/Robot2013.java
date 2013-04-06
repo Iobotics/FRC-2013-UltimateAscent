@@ -24,7 +24,7 @@ import org.iolani.frc.commands.autoprograms.*;
  */
 public class Robot2013 extends IterativeRobot {
 
-    Command autonomousCommand;
+    Command _autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -32,7 +32,7 @@ public class Robot2013 extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        //autonomousCommand = new AutoTest();
+        _autonomousCommand = new FireFromPyramid();
         
         // Initialize all subsystems
         CommandBase.init();
@@ -40,8 +40,8 @@ public class Robot2013 extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if(autonomousCommand != null) {
-            autonomousCommand.start();
+        if(_autonomousCommand != null) {
+            _autonomousCommand.start();
         }
     }
 
@@ -57,8 +57,8 @@ public class Robot2013 extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if(autonomousCommand != null) {
-            autonomousCommand.cancel();
+        if(_autonomousCommand != null) {
+            _autonomousCommand.cancel();
         }
     }
 

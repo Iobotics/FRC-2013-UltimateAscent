@@ -18,28 +18,22 @@ import org.iolani.frc.util.Utility;
  */
 public class Shooter extends Subsystem {
 
+    private static final double STAGE1_PERCENT = 0.75;
+    private static final double STAGE2_PERCENT = 1.0;
+    private static final double STAGE3_PERCENT = 1.0;
+    
     private CANJaguar _stageOne, _stageTwo, _stageThree;
-    private Solenoid  _pusher;
     private DoubleSolenoid _atco;
-    private double _lastPower = 0.0;
+    private double _lastPower;
     
     public void init() {
         _stageOne   = Utility.createJaguar("stageOne",   RobotMap.shooterStageOneJaguarID);
         _stageTwo   = Utility.createJaguar("stageTwo",   RobotMap.shooterStageTwoJaguarID);
         _stageThree = Utility.createJaguar("stageThree", RobotMap.shooterStageThreeJaguarID);
-        _pusher     = new Solenoid(RobotMap.shooterPusherValve);
         _atco       = new DoubleSolenoid(RobotMap.shooterAtcoValve1, RobotMap.shooterAtcoValve2);
         
         this.setPower(0.0);
         this.setElevation(false);
-    }
-    
-    public void setPusher(boolean value) {
-        _pusher.set(value);
-    }
-    
-    public boolean getPusher() {
-        return _pusher.get();
     }
     
     public void setElevation(boolean value) {
@@ -55,14 +49,29 @@ public class Shooter extends Subsystem {
     }
     
     public void setPower(double power) {
-        Utility.setJaguar(_stageOne,   -power);
-        Utility.setJaguar(_stageTwo,   -power);
-        Utility.setJaguar(_stageThree, -power);
+        Utility.setJaguar(_stageOne,   -power * STAGE1_PERCENT);
+        Utility.setJaguar(_stageTwo,   -power * STAGE2_PERCENT);
+        Utility.setJaguar(_stageThree, -power * STAGE3_PERCENT);
         _lastPower  = power;
     }
     
-    public double getPower() {
-        return _lastPower;
+    public boolean isRunning() {
+        return (_lastPower > 0);
+    }
+    
+    public void setStageOnePower(double power) {
+        Utility.setJaguar(_stageOne, -power * STAGE1_PERCENT);
+        _lastPower = power;
+    }
+    
+    public void setStageTwoPower(double power) {
+        Utility.setJaguar(_stageTwo, -power * STAGE2_PERCENT);
+        _lastPower = power;
+    }
+    
+    public void setStageThreePower(double power) {
+        Utility.setJaguar(_stageThree, -power * STAGE3_PERCENT);
+        _lastPower = power;
     }
     
     public void setSpeed(double speed) {

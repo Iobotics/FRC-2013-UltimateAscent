@@ -18,6 +18,7 @@ public abstract class CommandBase extends Command {
     public static Drivetrain drivetrain = new Drivetrain();
     public static Intake intake = new Intake(RobotMap.intakePWM);
     public static Shooter shooter = new Shooter();
+    public static ShooterPusher pusher = new ShooterPusher();
     public static BatWings batWings = new BatWings();
     public static Hanger hanger = new Hanger();
     public static Pneumatics pneumatics = new Pneumatics(RobotMap.compressorRelay, RobotMap.pressureSwitch);
@@ -33,6 +34,7 @@ public abstract class CommandBase extends Command {
         pneumatics.init();
         intake.init();
         shooter.init();
+        pusher.init();
         drivetrain.init();
         batWings.init();
         hanger.init();

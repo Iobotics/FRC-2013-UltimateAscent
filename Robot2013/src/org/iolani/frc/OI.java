@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.iolani.frc.commands.*;
-import org.iolani.frc.commands.autoprograms.AutoTest;
+import org.iolani.frc.commands.autoprograms.FireFromPyramid;
 import org.iolani.frc.util.PowerScaler;
 
 /**
@@ -23,6 +23,7 @@ public class OI {
     private final Button _hangerRetractButton = new JoystickButton(_lStick, 5);
     private final Button _slowModeButton = new JoystickButton(_lStick, 1);
     private final Button _spinButton = new JoystickButton(_rStick, 2);
+    private final Button _spin2Button = new JoystickButton(_rStick, 3);
     private final Button _fireButton = new JoystickButton(_rStick, 1);
     private final Button _aimUpButton = new JoystickButton(_rStick, 6);
     private final Button _aimDownButton = new JoystickButton(_rStick, 7);
@@ -62,14 +63,14 @@ public class OI {
         
         _driveScaler = new PowerScaler(new PowerScaler.PowerPoint[] {
                 new PowerScaler.PowerPoint(0.05, 0.0),
-                new PowerScaler.PowerPoint(0.8, 0.5),
-                new PowerScaler.PowerPoint(0.95, 1.0)
+                new PowerScaler.PowerPoint(0.65, 0.5),
+                new PowerScaler.PowerPoint(0.80, 1.0)
             });
         
         _intakeButton.whenPressed(new IntakeTest());
         
-        _spinButton.whenPressed(new SetShooterPower(1.0));
-        _spinButton.whenReleased(new SetShooterPower(0.0));
+        _spinButton.whileHeld(new SetShooterPower(0.9, true));
+        _spin2Button.whileHeld(new SetShooterPower(1.0, true));
         _fireButton.whenPressed(new FireFrisbee());
         _aimUpButton.whenPressed(new SetShooterElevation(true));
         _aimDownButton.whenPressed(new SetShooterElevation(false));
@@ -77,7 +78,7 @@ public class OI {
         
         _testButton.whileHeld(new ShooterTest());
         //_testButton.whileHeld(new PIDTest());
-        _test2Button.whenPressed(new AutoTest());
+        _test2Button.whenPressed(new FireFromPyramid());
         //test3Button.whileHeld(new SetConveyor(CommandBase.loader, Conveyor.ConveyorMode.kUp));
         //_test4Button.whenPressed(new ScoreDisksAuto());
     }

@@ -18,24 +18,24 @@ public class FireFrisbee extends CommandBase {
     private boolean _abort = false;
     
     public FireFrisbee() {
-        this.requires(shooter);
+        this.requires(pusher);
         this.setInterruptible(false);
         this.setTimeout(FIRE_TIME + RELOAD_TIME); // timeout after both periods //
     }
 
     protected void initialize() {
-        if(shooter.getPower() == 0.0) {
+        if(!shooter.isRunning()) {
             _abort = true;
         } else {
-            shooter.setPusher(true);
+            pusher.set(true);
             _abort = false;
         }
     }
 
     protected void execute() {
         // after fire timeout, pull back pusher //
-        if(shooter.getPusher() && (this.timeSinceInitialized() > FIRE_TIME)) {
-            shooter.setPusher(false);
+        if(pusher.get() && (this.timeSinceInitialized() > FIRE_TIME)) {
+            pusher.set(false);
         }
     }
 
@@ -46,7 +46,7 @@ public class FireFrisbee extends CommandBase {
 
     protected void end() {
         // redundant because we are uninterruptible, but do for safety //
-        shooter.setPusher(false);
+        pusher.set(false);
     }
 
     protected void interrupted() {
