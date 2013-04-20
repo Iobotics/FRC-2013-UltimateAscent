@@ -53,6 +53,7 @@ public class Robot2013 extends IterativeRobot {
     }
 
     public void teleopInit() {
+        System.out.println("hello");
 	// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
