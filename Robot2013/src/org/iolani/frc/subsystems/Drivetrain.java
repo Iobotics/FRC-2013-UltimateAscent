@@ -118,8 +118,24 @@ public class Drivetrain extends Subsystem {
         _drive.mecanumDrive_Polar(mag, dir, rot);
     }
     
+    public void setMecanum(double x, double y, double rot, double gyro) {
+        _drive.mecanumDrive_Cartesian(x, y, rot, gyro);
+    }
+    
     public void setTank(double left, double right) {
         _drive.tankDrive(left, right);
+    }
+    
+    public double getGyroDegrees() {
+        return _gyro.getAngle();
+    }
+    
+    public void resetGyro() {
+        _gyro.reset();
+    }
+    
+    public void setGyroSensitivity(double sensitivity) {
+        _gyro.setSensitivity(sensitivity);
     }
     
     public void autoBeginMove(double distance) {
