@@ -28,6 +28,8 @@ public class OI {
     private final Button _aimUpButton = new JoystickButton(_rStick, 6);
     private final Button _aimDownButton = new JoystickButton(_rStick, 7);
     
+    private final Button _resetGyroButton = new JoystickButton(_lStick, 2);
+    
     private final Button _testButton = new JoystickButton(_lStick, 6);
     private final Button _test2Button = new JoystickButton(_lStick, 10);
     private final Button _test3Button = new JoystickButton(_lStick, 8);
@@ -75,12 +77,17 @@ public class OI {
         _aimUpButton.whenPressed(new SetShooterElevation(true));
         _aimDownButton.whenPressed(new SetShooterElevation(false));
         
+        _resetGyroButton.whenPressed(new ResetGyro());
         
         _testButton.whileHeld(new ShooterTest());
         //_testButton.whileHeld(new PIDTest());
         _test2Button.whenPressed(new FireFromPyramid());
         //test3Button.whileHeld(new SetConveyor(CommandBase.loader, Conveyor.ConveyorMode.kUp));
         //_test4Button.whenPressed(new ScoreDisksAuto());
+    }
+    
+    public double getGyroSensitivity() {
+        return (1 - _lStick.getTwist()) / 2;
     }
 }
 

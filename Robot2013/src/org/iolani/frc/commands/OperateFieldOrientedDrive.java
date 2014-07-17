@@ -25,6 +25,7 @@ public class OperateFieldOrientedDrive extends CommandBase {
         double gyro = drivetrain.getGyroDegrees();
         // scaler //
         drivetrain.setMecanum(x, y, rot, gyro);
+        drivetrain.setGyroSensitivity(oi.getGyroSensitivity());
     }
 
     protected boolean isFinished() {
