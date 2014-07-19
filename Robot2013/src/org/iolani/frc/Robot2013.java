@@ -68,6 +68,7 @@ public class Robot2013 extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        //System.out.println("Gryo degrees = " + CommandBase.drivetrain.getGyroDegrees());
     }
     
     /**

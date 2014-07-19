@@ -16,16 +16,17 @@ public class OperateFieldOrientedDrive extends CommandBase {
     }
 
     protected void initialize() {
+        drivetrain.resetGyro();
+        drivetrain.setGyroSensitivity(0.007);
     }
 
     protected void execute() {
         double x = oi.getRightStick().getX();
-        double y = oi.getLeftStick().getY();
+        double y = oi.getRightStick().getY();
         double rot = oi.getLeftStick().getX();
         double gyro = drivetrain.getGyroDegrees();
         // scaler //
         drivetrain.setMecanum(x, y, rot, gyro);
-        drivetrain.setGyroSensitivity(oi.getGyroSensitivity());
     }
 
     protected boolean isFinished() {

@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.iolani.frc.RobotMap;
-import org.iolani.frc.commands.OperatorDrive;
+import org.iolani.frc.commands.OperateFieldOrientedDrive;
 
 /**
  *
@@ -234,7 +234,7 @@ public class Drivetrain extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        this.setDefaultCommand(new OperatorDrive());
+        this.setDefaultCommand(new OperateFieldOrientedDrive());
     }
     
     private void enablePIDs() {

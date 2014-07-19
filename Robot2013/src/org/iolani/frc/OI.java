@@ -85,9 +85,5 @@ public class OI {
         //test3Button.whileHeld(new SetConveyor(CommandBase.loader, Conveyor.ConveyorMode.kUp));
         //_test4Button.whenPressed(new ScoreDisksAuto());
     }
-    
-    public double getGyroSensitivity() {
-        return (1 - _lStick.getTwist()) / 2;
-    }
 }
 

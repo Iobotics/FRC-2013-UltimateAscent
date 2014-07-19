@@ -33,7 +33,7 @@ public abstract class CommandBase extends Command {
         
         pneumatics.init();
         intake.init();
-        shooter.init();
+        //shooter.init();
         pusher.init();
         drivetrain.init();
         batWings.init();
